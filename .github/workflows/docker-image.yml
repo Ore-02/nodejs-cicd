@@ -31,12 +31,12 @@ jobs:
     steps:
       - name: Run container from image
         run: |
-          docker run -d --name temp-container -p 3000:3000 yourusername/nodejs-cicd:1.0
+          docker run -d --name temp-container -p 3000:3000 oreay/nodejs-cicd:1.0
       - name: Wait for app to boot
         run: sleep 10
       - name: Health Check
         run: |
-          curl --fail http://localhost:3000 || (echo "❌ Health check failed!" && exit 1)
+          curl --fail http://localhost:3000 || (echo "Health check failed!" && exit 1)
       - name: Stop container
         if: always()
         run: docker rm -f temp-container || true
