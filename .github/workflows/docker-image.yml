@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: docker-image
-          path: $IMAGE_ARTIFACT
+          path: ${{ env.IMAGE_ARTIFACT }}
 
 
   test-image:
