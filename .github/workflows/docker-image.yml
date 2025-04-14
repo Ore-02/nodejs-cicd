@@ -104,9 +104,9 @@ jobs:
 
       - name: Ensure Docker is installed 
         run: |
-          chmod +x ./scripts/install-docker.sh
-          ./scripts/install-docker.sh 
-      
+          chmod +x scripts/install-docker.sh
+          scripts/install-docker.sh 
+       
       - name: Log in to DockerHub
         run: echo "${{ secrets.REGISTRY_PASS }}" | docker login -u "${{ secrets.REGISTRY_USER }}" --password-stdin
       
