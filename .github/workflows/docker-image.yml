@@ -117,17 +117,8 @@ jobs:
             else
                 echo "Docker already installed."
             fi
+            echo "${{ secrets.REGISTRY_PASS }}" | docker login -u "${{ secrets.REGISTRY_USER }}" --password-stdin
+            docker pull $IMAGE_NAME
+            docker rm -f nodejs-app || true
+            docker run -d --name nodejs-app -p 3000:3000 $IMAGE_NAME
 
-      - name: Log in to DockerHub
-        run: echo "${{ secrets.REGISTRY_PASS }}" | docker login -u "${{ secrets.REGISTRY_USER }}" --password-stdin
-      
-      - name: Pull Docker Image from Docker Hub
-        run: docker pull $IMAGE_NAME
-
-      - name: Stop and Remove Existing Container
-        run: |
-          docker rm -f node-app || true
-
-      - name: Run Docker Container
-        run: |
-          docker run -d --name node-app -p 3000:3000 $IMAGE_NAME
